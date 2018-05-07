@@ -1,0 +1,2 @@
+iarasi am experimentat cu git
+am vorbit la general despre structura logica si fizica a unei baze de date
