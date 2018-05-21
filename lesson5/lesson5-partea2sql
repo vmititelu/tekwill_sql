@@ -1,0 +1,67 @@
+/*select employee_id
+    ,salary * 1.1 AS "Salary encrease"
+    ,salary *12 annual_salary
+from employees*/
+
+/*select first_name || ' ' || last_name AS full_name
+    ,email
+    ,phone_number
+from EMPLOYEES*/
+
+/*SELECT manager_id || ' ' ||'Manager_id'||'12220'
+      ,manager_id || ' ' ||'Manager_id'||'is ok'
+FROM employees*/
+
+/*SELECT manager_id || ' ' ||'Manager_id'||'12220'
+      ,manager_id || 'That''s not OK'
+FROM employees*/
+
+--select first_name || ' ' || q'[What's a quote among friends?]'
+--from employees
+
+/*select manager_id || ' ' || 'Manager_id' || '12220' AS test_1
+      ,manager_id || ' ' || 'Manager_id' || 'is ok' as test_2
+      ,first_name || ' ' || q'[What's a quote among friends?]' AS test_4
+      ,first_name || last_name || '@gmail.com' as test_5
+from employees      */
+
+--select *
+--from AD_FACULTY_DETAILS
+
+--select *
+--from AD_FACULTY_COURSE_DETAILS
+      
+--select  distinct faculty_id
+--from AD_FACULTY_COURSE_DETAILS
+      
+--select distinct *
+--from EMPLOYEES
+      
+--desc EMPLOYEES
+
+/*select *
+from EMPLOYEES
+where department_id =90*/
+
+--select *
+--from EMPLOYEES
+--where hire_date = '17.10.11'
+
+--select sysdate
+--from dual
+
+--select *
+--from EMPLOYEES 
+--where EMPLOYEE_ID = 100
+
+--select *
+--from EMPLOYEES
+--where salary between 1000 AND 5000
+      
+select *
+from EMPLOYEES
+where HIRE_DATE BETWEEN '01.01.2010' AND '01.04.2014'
+      
+      
+      
+      
