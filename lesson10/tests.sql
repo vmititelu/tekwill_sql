@@ -1,0 +1,97 @@
+--Item 1
+SELECT FIRST_NAME
+      ,ROUND(MONTHS_BETWEEN(SYSDATE,STUDENT_REG_YEAR), 0) AS MONTHS_COMPLETED
+FROM AD_STUDENT_DETAILS
+ORDER BY MONTHS_COMPLETED;
+
+--Item 2
+SELECT FIRST_NAME
+      ,TRUNC((SYSDATE - student_reg_year)/7, 0) AS WEEKS_COMPLETED
+FROM AD_STUDENT_DETAILS
+WHERE EMAIL_ADDR IS NULL
+ORDER BY 2 DESC;
+
+--Item 3
+SELECT FIRST_NAME
+      ,STUDENT_REG_YEAR
+      ,TO_CHAR(NEXT_DAY(ADD_MONTHS(STUDENT_REG_YEAR, 6), 'Monday'),'fmDay, "the" Ddspth "of" Month, YYYY') AS REVIEW
+      --,TO_CHAR(NEXT_DAY(ADD_MONTHS(STUDENT_REG_YEAR, 6), 1),'fmDay, "the" Ddspth "of" Month, YYYY') AS REVIEW
+FROM AD_STUDENT_DETAILS;
+
+--Item 4
+SELECT STUDENT_ID
+      ,MARKS
+      ,'$' || MARKS AS PRIZE_AMOUNT
+      ,TO_CHAR(marks, '$99') AS PRIZE_AMOUNT--a doua metoda
+FROM AD_EXAM_RESULTS
+WHERE MARKS > 90;
+
+--Item 5
+SELECT EXAM_TYPE
+      ,CASE exam_type WHEN 'MCE' THEN 'OBJECTIVE'
+                      WHEN 'TF' THEN 'OBJECTIVE'
+                      WHEN 'FIB' THEN 'OBJECTIVE'
+                      WHEN 'ESS' THEN 'SUBJECTIVE'
+                      WHEN 'SA' THEN 'SUBJECTIVE'
+                      WHEN 'PS' THEN 'ANALYTICAL'
+                      WHEN 'LAB' THEN 'PRACTICAL'
+       ELSE 'NOT PERMITTED' END "Nature of Exam"
+FROM AD_EXAM_TYPE;
+
+--Item 5, var. 2
+SELECT EXAM_TYPE
+      ,CASE WHEN exam_type IN ('MCE', 'TF', 'FIB') THEN 'OBJECTIVE'
+            WHEN exam_type IN ('ESS', 'SA') THEN 'SUBJECTIVE'
+            WHEN exam_type = 'PS' THEN 'ANALYTICAL'
+            WHEN exam_type = 'LAB' THEN 'PRACTICAL'
+       ELSE 'NOT PERMITTED' END "Nature of Exam"
+FROM AD_EXAM_TYPE;
+
+--Item 6
+SELECT EXAM_TYPE
+      ,DECODE( exam_type, 'MCE','OBJECTIVE'
+                      , 'TF' , 'OBJECTIVE'
+                      , 'FIB' , 'OBJECTIVE'
+                      , 'ESS' , 'SUBJECTIVE'
+                      , 'SA' , 'SUBJECTIVE'
+                      , 'PS' , 'ANALYTICAL'
+                      , 'LAB' , 'PRACTICAL'
+              ,'NOT PERMITTED') "Nature of Exam"
+FROM AD_EXAM_TYPE;
+
+--Item 7
+SELECT COURSE_ID
+      ,COUNT(STUDENT_ID)
+FROM AD_STUDENT_COURSE_DETAILS
+GROUP BY COURSE_ID;
+
+--Item 8
+SELECT MAX(salary) - MIN(salary) DIFFERENCE
+FROM AD_FACULTY_DETAILS;
+
+--Item 9
+SELECT COURSE_ID
+      ,AVG(MARKS)
+FROM AD_EXAM_RESULTS
+GROUP BY COURSE_ID
+HAVING AVG(MARKS) > 85;
+
+--Item 10
+SELECT
+    *
+FROM AD_COURSE_DETAILS
+
+SELECT
+    *
+FROM AD_DEPARTMENT;
+
+SELECT
+    *
+FROM AD_COURSE_DETAILS, AD_DEPARTMENT;
+
+SELECT AD_DEPARTMENT.DEPARTMENT_NAME
+      ,AD_DEPARTMENT.HOD
+      ,AD_COURSE_DETAILS.COURSE_NAME
+FROM AD_COURSE_DETAILS
+JOIN AD_DEPARTMENT
+USING (department_id);
